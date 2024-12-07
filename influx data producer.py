@@ -1,6 +1,6 @@
 # from random import Random
 from datetime import datetime
-import sensor
+import sensor # Local Module - github user: sam-a-d
 import time, os
 
 from dotenv import load_dotenv
