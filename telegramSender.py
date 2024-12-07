@@ -4,8 +4,6 @@ load_dotenv()
 
 import requests
 
-telegram_bot_tocken = os.getenv('TELEGRAM_BOT_API')
-
 class TelegramSender:
 
     def __init__(self, bot_token, chat_id, message='Risky Condition'):
