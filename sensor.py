@@ -3,6 +3,7 @@ import random
 class Sensor:
     '''
         This module is responsible for producing the sensor data based on some specified criteria
+        Author's Github --> sam-a-d
     '''
     
     def __init__(self, temp=(18,30), humid=(0.05, 0.8), soilSaturatoin=(0,1), water_level=(0,5), \
