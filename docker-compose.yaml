@@ -1,0 +1,85 @@
+services:
+
+  influxdb:
+    image: influxdb:2.4-alpine
+    container_name: influxdb-softArc
+    restart: no
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=softArc_token
+      - DOCKER_INFLUXDB_INIT_ORG=softArc
+      - DOCKER_INFLUXDB_INIT_BUCKET=floodSensors
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb_data:/var/lib/influxdb/softArc
+    networks:
+      - softArc-network
+      
+  postgresdb:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: SoftArc
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/softArc
+    ports:
+      - 5432:5432
+    networks:
+      - softArc-network
+  
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: no
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana_storage:/var/lib/grafana/softArc 
+    networks:
+      - softArc-network
+  
+  data_producer:
+    build:
+      context: .
+    environment:
+      - INFLUX_URL=http://influxdb:8086
+    container_name: influx_dataProducer
+    restart: no
+    depends_on:
+      - influxdb
+    networks:
+      - softArc-network
+
+  alert_manager:
+    build:
+      context: .
+    environment:
+      - INFLUX_URL=http://influxdb:8086
+    container_name: influx_alert_manager
+    restart: no
+    depends_on:
+      - influxdb
+    networks:
+      - softArc-network
+    command: python alertMgt.py
+  
+volumes:
+  influxdb_data: {}
+  grafana_storage: {}
+  postgres_data: {}
+
+networks:
+  softArc-network:
+    driver: bridge
+    name: softArc
+    ipam:
+      config:
+        - subnet: 172.40.0.0/16
