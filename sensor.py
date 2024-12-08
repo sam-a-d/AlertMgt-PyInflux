@@ -5,12 +5,44 @@ class Sensor:
         This module is responsible for producing the sensor data based on some specified criteria
     '''
     
-    def __init__(self, temp=(18,30), humid=(0.3, 0.6), soilMoist=(0,1)):
+    def __init__(self, temp=(18,30), humid=(0.05, 0.8), soilSaturatoin=(0,1),\
+                  water_level=(0,5), flow_velocity=(0,5), rainfall=(0,1000), windSpeed=(0,150)):
+        
         self.tags = ['high', 'mid', 'low']
+        self.water_level = water_level
+        self.flow_velocity = flow_velocity
+        self.soilSaturatoin = soilSaturatoin
+        self.rainfall = rainfall
+        self.windSpeed = windSpeed
+
         self.temp = temp
         self.humid = humid
-        self.soilMoist = soilMoist
     
+    def getWaterLevel(self, *args):
+        
+        self.water_level = args if args else self.water_level
+        return random.uniform(*self.water_level)
+    
+    def getFlowVelocity(self, *args):
+
+        self.flow_velocity = args if args else self.flow_velocity
+        return random.uniform(self.flow_velocity)
+
+    def getSoilSaturation(self, *args):
+        
+        self.soilSaturatoin = args if args else self.soilSaturatoin
+        return random.uniform(*self.soilSaturatoin)
+    
+    def getCumulativeRainfall(self, *args):
+
+        self.rainfall = args if args else self.rainfall
+        return random.uniform(*self.rainfall)
+
+    def getWindSpeed(self, *args):
+
+        self.windSpeed = args if args else self.windSpeed
+        return random.uniform(*self.windSpeed)
+
     def getTemp(self, *args):
         
         self.temp = args if args else self.temp
@@ -20,11 +52,6 @@ class Sensor:
         
         self.humid = args if args else self.humid
         return random.uniform(*self.humid)
-
-    def getSoilMoist(self, *args):
-        
-        self.soilMoist = args if args else self.soilMoist
-        return random.uniform(*self.soilMoist)
 
     def get_tag(self):
 
