@@ -34,7 +34,7 @@ class DataAnalyzer:
         with InfluxDBClient(url=self.url, token=self.token, org=self.org) as client:
             query = f'''
                 from(bucket: "{self.bucket}")
-                |> range(start: -5h)
+                |> range(start: -2m)
                 |> filter(fn: (r) => r["_measurement"] == "SensorValues")
                 |> filter(fn: (r) => 
                     {self.__queryGenerator(water=self.water_thres, rain=self.rain_thres)}
