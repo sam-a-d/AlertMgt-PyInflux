@@ -2,6 +2,8 @@ from telegramSender import TelegramSender # Local Module - github user: sam-a-d
 from dataAnalyzer import DataAnalyzer
 
 import os, time
+from dotenv import load_dotenv
+load_dotenv(override=True)
 
 # You can generate an API token from the "API Tokens Tab" in the UI
 token = os.getenv('INFLUX_ACCESS_TOKEN')
