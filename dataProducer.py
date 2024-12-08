@@ -4,7 +4,7 @@ import sensor # Local Module - github user: sam-a-d
 import time, os
 
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(override=False)
 
 
 # You can generate an API token from the "API Tokens Tab" in the U

@@ -3,7 +3,7 @@ from dataAnalyzer import DataAnalyzer
 
 import os, time
 from dotenv import load_dotenv
-load_dotenv(override=True)
+load_dotenv(override=False)
 
 # You can generate an API token from the "API Tokens Tab" in the UI
 token = os.getenv('INFLUX_ACCESS_TOKEN')
