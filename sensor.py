@@ -20,37 +20,37 @@ class Sensor:
     
     def getWaterLevel(self, *args):
         
-        self.water_level = args if args else self.water_level
+        self.water_level = args[0] if args else self.water_level
         return random.uniform(*self.water_level)
     
     def getFlowVelocity(self, *args):
 
-        self.flow_velocity = args if args else self.flow_velocity
+        self.flow_velocity = args[0] if args else self.flow_velocity
         return random.uniform(*self.flow_velocity)
 
     def getSoilSaturation(self, *args):
         
-        self.soilSaturatoin = args if args else self.soilSaturatoin
+        self.soilSaturatoin = args[0] if args else self.soilSaturatoin
         return random.uniform(*self.soilSaturatoin)
     
     def getCumulativeRainfall(self, *args):
 
-        self.rainfall = args if args else self.rainfall
+        self.rainfall = args[0] if args else self.rainfall
         return random.uniform(*self.rainfall)
 
     def getWindSpeed(self, *args):
 
-        self.windSpeed = args if args else self.windSpeed
+        self.windSpeed = args[0] if args else self.windSpeed
         return random.uniform(*self.windSpeed)
 
     def getTemp(self, *args):
         
-        self.temp = args if args else self.temp
+        self.temp = args[0] if args else self.temp
         return random.uniform(*self.temp)
 
     def getHumidity(self, *args):
         
-        self.humid = args if args else self.humid
+        self.humid = args[0] if args else self.humid
         return random.uniform(*self.humid)
     
     def getArea(self, *args):
@@ -65,10 +65,10 @@ class Sensor:
     
     def getRandomArea(self):
         
-        self.areas = ['Area1', 'Area2', 'Area3']
-        return self.areas[random.randint(0, len(self.areas)-1)]
+        areas = ['Area1', 'Area2', 'Area3']
+        return areas[random.randint(0, len(areas)-1)]
     
     def getRandomRegion(self):
 
-        self.regions = ['Region1', 'Region2', 'Region3']
-        return self.regions[random.randint(0, len(self.regions)-1)]
+        regions = ['Region1', 'Region2', 'Region3']
+        return regions[random.randint(0, len(regions)-1)]
