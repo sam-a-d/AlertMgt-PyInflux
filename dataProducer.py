@@ -34,7 +34,6 @@ with InfluxDBClient(url=url, token=token, org=org) as client:
         .field("wind",S.getWindSpeed())\
         
         time.sleep(1)
-        print('Okay till')
         write_api.write(bucket, org, point)
 
 client.close()
