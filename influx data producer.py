@@ -28,15 +28,18 @@ with InfluxDBClient(url=url, token=token, org=org) as client:
     S = sensor.Sensor()
     write_api = client.write_api(write_options=SYNCHRONOUS)
 
-    for i in range(3):
+    for i in range(1000):
     
         point = Point("SensorValues")\
-        .tag('risk', S.get_tag())\
-        .field("Temp", S.getTemp())\
-        .field("Hum", S.getHumidity())\
-        .field("SoilMoist", S.getSoilMoist())\
-
-        time.sleep(3)
+        .tag("area", S.getArea())\
+        .tag("region", S.getRegion())\
+        .field("rain",S.getCumulativeRainfall())\
+        .field("flow",S.getFlowVelocity())\
+        .field("soilSat",S.getSoilSaturation())\
+        .field("water",S.getWaterLevel())\
+        .field("wind",S.getWindSpeed())\
+        
+        time.sleep(1)
         write_api.write(bucket, org, point)
 
 client.close()
