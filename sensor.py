@@ -55,20 +55,20 @@ class Sensor:
     
     def getArea(self, *args):
 
-        self.area = args[0] if args  else self.getRandomArea()
+        self.area = args[0] if args  else self.__getRandomArea()
         return self.area
 
     def getRegion(self, *args):
 
-        self.region = args[0] if args else self.getRandomRegion()
+        self.region = args[0] if args else self.__getRandomRegion()
         return self.region
     
-    def getRandomArea(self):
+    def __getRandomArea(self):
         
         areas = ['Area1', 'Area2', 'Area3']
         return areas[random.randint(0, len(areas)-1)]
     
-    def getRandomRegion(self):
+    def __getRandomRegion(self):
 
         regions = ['Region1', 'Region2', 'Region3']
         return regions[random.randint(0, len(regions)-1)]
