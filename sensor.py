@@ -5,10 +5,10 @@ class Sensor:
         This module is responsible for producing the sensor data based on some specified criteria
     '''
     
-    def __init__(self, temp=(18,30), humid=(0.05, 0.8), soilSaturatoin=(0,1),\
-                  water_level=(0,5), flow_velocity=(0,5), rainfall=(0,1000), windSpeed=(0,150)):
+    def __init__(self, temp=(18,30), humid=(0.05, 0.8), soilSaturatoin=(0,1), water_level=(0,5), \
+                 flow_velocity=(0,5), rainfall=(0,1000), windSpeed=(0,150)):
         
-        self.tags = ['high', 'mid', 'low']
+        # self.tags = ['high', 'mid', 'low']
         self.water_level = water_level
         self.flow_velocity = flow_velocity
         self.soilSaturatoin = soilSaturatoin
@@ -26,7 +26,7 @@ class Sensor:
     def getFlowVelocity(self, *args):
 
         self.flow_velocity = args if args else self.flow_velocity
-        return random.uniform(self.flow_velocity)
+        return random.uniform(*self.flow_velocity)
 
     def getSoilSaturation(self, *args):
         
@@ -52,7 +52,23 @@ class Sensor:
         
         self.humid = args if args else self.humid
         return random.uniform(*self.humid)
+    
+    def getArea(self, *args):
 
-    def get_tag(self):
+        self.area = args[0] if args  else self.getRandomArea()
+        return self.area
 
-        return self.tags[random.randint(0, len(self.tags)-1)]
+    def getRegion(self, *args):
+
+        self.region = args[0] if args else self.getRandomRegion()
+        return self.region
+    
+    def getRandomArea(self):
+        
+        self.areas = ['Area1', 'Area2', 'Area3']
+        return self.areas[random.randint(0, len(self.areas)-1)]
+    
+    def getRandomRegion(self):
+
+        self.regions = ['Region1', 'Region2', 'Region3']
+        return self.regions[random.randint(0, len(self.regions)-1)]
