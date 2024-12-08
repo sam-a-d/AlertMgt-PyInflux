@@ -23,8 +23,6 @@ def send_alert(message="Risky Condition", chat_id=[7325990260]):
 
 D = DataAnalyzer(token=token, org=org, bucket=bucket, url=url, water_thres=4.7, rain_thres=950)
 
-print(D.get_riskCondition())
-
 while True:
     # chek if the condition is risky
     if D.get_riskCondition():
